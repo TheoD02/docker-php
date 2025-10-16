@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Use pgrep to check if the Symfony Messenger process is running
+if pgrep -f "messenger:consume" > /dev/null
+then
+    exit 0
+else
+    echo "❌ Healthcheck failed: Symfony Messenger worker process cannot be found."
+    exit 1
+fi

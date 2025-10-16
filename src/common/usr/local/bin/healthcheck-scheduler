@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Symfony Scheduler can run in different ways:
+# 1. Using messenger:consume scheduler_* (recommended)
+# 2. Using a dedicated scheduler:consume command (some bundles)
+
+# Check for messenger consuming scheduler transport
+if pgrep -f "messenger:consume.*scheduler" > /dev/null
+then
+    exit 0
+# Check for dedicated scheduler command
+elif pgrep -f "scheduler:consume" > /dev/null
+then
+    exit 0
+else
+    echo "❌ Healthcheck failed: Symfony Scheduler process cannot be found."
+    exit 1
+fi

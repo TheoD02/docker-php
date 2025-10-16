@@ -422,7 +422,7 @@ if laravel_is_installed; then
         artisan_optimize
     fi
 else
-    echo "❌ $script_name: Could not detect Laravel installation."
-    echo "ℹ️  Check that the application is installed in $APP_BASE_DIR"
-    exit 1
+    if [ "$LOG_OUTPUT_LEVEL" = "debug" ] || [ "$LOG_OUTPUT_LEVEL" = "info" ]; then
+        echo "ℹ️  $script_name: Laravel not detected or AUTORUN_ENABLED is not set to 'true'. Skipping Laravel automations."
+    fi
 fi
